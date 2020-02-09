@@ -37,7 +37,7 @@ function Vector2:add (other)
 end
 
 function Vector2:sub (other)
-	return Vector2:new((self.x - other.x), (self.y - other.y))
+	return Vector2:new(self.x - other.x, self.y - other.y)
 end
 
 function Vector2:mul (value)
@@ -85,11 +85,8 @@ function Vector2:rotate(degrees)
   sin_of_rotation = math.sin(math.rad(degrees))
   cos_of_rotation = math.cos(math.rad(degrees))
   
-  tempx = self.x
-  tempy = self.y
-  
-  newx = (cos_of_rotation * tempx) - (sin_of_rotation * tempy)
-  newy = (sin_of_rotation * tempx) - (cos_of_rotation * tempy)
+  newx = (cos_of_rotation * self.x) - (sin_of_rotation * self.y)
+  newy = (sin_of_rotation * self.x) - (cos_of_rotation * self.y)
   
   return Vector2:new(newx,newy)
 end
