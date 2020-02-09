@@ -126,6 +126,6 @@ function draw_wind()
   screen.line(blade_2.x, blade_2.y)
   screen.stroke()
   
-  screen.move(128,44)
-  screen.text_right((wind_direction+180) % 360)
+  screen.move(128,42)
+  screen.text_right(((wind_direction+180) % 360 .. "º"))
 end
