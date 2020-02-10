@@ -4,7 +4,6 @@ local Striker = {}
 Striker.__index = Striker
 
 local origin = Vector2:new()
-local radius = 22
 
 function rand_between(a,b)
   range = b - a
@@ -16,9 +15,11 @@ function Striker:new(angle, amplitude)
   local o = {}
   setmetatable(o, Striker)
 
+  o._mult = 0.05
+  o._rad = 11
   o.position = origin
-  o.velocity = Vector2:new(rand_between(-0.05,0.05),rand_between(-0.05,0.05))
-  o.amplitude = self:set_amplitude(amplitude)
+  o.velocity = Vector2:new(rand_between(0-o._mult,o._mult),rand_between(0-o._mult, o._mult))
+  o.amplitude = Vector2:new(rand_between(0,o._rad),rand_between(0,o._rad))
   o.angle = self:set_angle(angle)
 	return o
 end
@@ -29,11 +30,17 @@ function Striker:set_angle(deg)
   print(self.angle:tostring())
 end
 
-function Striker:set_amplitude(amp)
+function Striker:set_velocity_mult(mult)
   -- takes a number from 1 to 20
   -- 20 should be '150% radius'
-  local rad = amp/20
-  self.amplitude = Vector2:new(rand_between(0, rad),rand_between(0, radius))
+  self._mult = mult
+  self.velocity = Vector2:new(rand_between(0-self._mult,self._mult),rand_between(0-self._mult, self._mult))
+end
+
+function Striker:set_rad(rad)
+  -- takes a number from 1 to 35
+  self._rad = rad
+  self.amplitude = Vector2:new(rand_between(0, self._rad),rand_between(0, self._rad))
 end
 
 function Striker:apply_force(vec2)

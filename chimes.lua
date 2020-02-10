@@ -80,7 +80,8 @@ function enc(n,d)
   elseif (n==3) then
     wind.intensity = (wind.intensity + d)
     wind.intensity = util.clamp(wind.intensity,1,20)
-    striker:set_amplitude(wind.intensity)
+    striker:set_velocity_mult(wind.intensity/20.0)
+    striker:set_rad(wind.intensity/20.0* 35)
   end
 end
 
